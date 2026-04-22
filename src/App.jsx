@@ -303,7 +303,7 @@ function projectTasks(wx, hist) {
       : tmp<50
       ? "Below 50°F, stain won't penetrate or cure. Most oil-based products need 50°F+ for 24hrs after application."
       : rainComing
-      ? "Don't start — rain within 24hrs will wash uncured stain away. Wait for a clear 48hr window.",
+      ? "Do not start — rain within 24hrs will wash uncured stain away. Wait for a clear 48hr window.",
     conditions: [{label:"Temp",     value:`${Math.round(tmp)}°F`, ok:tmp>=50&&tmp<=90},
                  {label:"Humidity", value:`${Math.round(hum)}%`,  ok:hum<=65},
                  {label:"Rain",     value:rain48>0?`${rain48.toFixed(2)}"`:rainComing?"Coming":"Clear", ok:rain48<0.1&&!rainComing}],
