@@ -288,25 +288,26 @@ function projectTasks(wx, hist) {
 
   // Staining / sealing
   const stainReady = tmp>=50 && tmp<=90 && hum<=65 && rain48<0.1 && !rainComing;
-  tasks.push({
+ tasks.push({
     id:"stain",
     name:"Wood Stain / Deck Sealing",
     category:"project",
     emoji:"🪵",
     ready: stainReady,
     color: stainReady ? C.good : C.warn,
-    status: stainReady ? "Good window" : hum>65?"Too humid" : tmp<50?"Too cold" : rainComing?"Rain coming":"Check conditions",
+    status: stainReady ? "Good window" : hum>65 ? "Too humid" : tmp<50 ? "Too cold" : rainComing ? "Rain coming" : "Check conditions",
     desc: stainReady
-      ? "Good conditions for staining. Wood should be clean and dry — wait 48hrs after any rain before staining bare wood."
+      ? "Good conditions for staining. Wood should be clean and dry. Wait 48hrs after rain before staining bare wood."
       : hum>65
-      ? `Humidity at ${Math.round(hum)}% — stain needs below 65% to penetrate properly. High humidity causes blotchy finish and slow cure.`
+      ? ("Humidity at " + Math.round(hum) + "% - stain needs below 65% to penetrate. High humidity causes blotchy finish.")
       : tmp<50
-      ? "Below 50°F, stain won't penetrate or cure. Most oil-based products need 50°F+ for 24hrs after application."
+      ? "Below 50F, stain will not penetrate or cure. Most oil-based products need 50F+ for 24hrs after application."
       : rainComing
-      ? "Do not start — rain within 24hrs will wash uncured stain away. Wait for a clear 48hr window.",
-    conditions: [{label:"Temp",     value:`${Math.round(tmp)}°F`, ok:tmp>=50&&tmp<=90},
-                 {label:"Humidity", value:`${Math.round(hum)}%`,  ok:hum<=65},
-                 {label:"Rain",     value:rain48>0?`${rain48.toFixed(2)}"`:rainComing?"Coming":"Clear", ok:rain48<0.1&&!rainComing}],
+      ? "Do not start. Rain within 24hrs will wash uncured stain away. Wait for a clear 48hr window."
+      : "Check conditions before starting.",
+    conditions: [{label:"Temp", value:`${Math.round(tmp)}F`, ok:tmp>=50&&tmp<=90},
+                 {label:"Humidity", value:`${Math.round(hum)}%`, ok:hum<=65},
+                 {label:"Rain", value:rain48>0?`${rain48.toFixed(2)}in`:rainComing?"Coming":"Clear", ok:rain48<0.1&&!rainComing}],
   });
 
   // Caulking
