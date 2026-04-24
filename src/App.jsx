@@ -51,7 +51,7 @@ async function fetchAWN(apiKey, macAddress) {
   if (!res.ok) throw new Error("AWN fetch failed: " + res.status);
   const data = await res.json();
   if (!data || !data[0]) throw new Error("No data from AWN");
-  const d = data[0].lastData;
+  const d = data[0].lastData || data[0];
   return {
     temperature_2m: d.tempf,
     relative_humidity_2m: d.humidity,
